@@ -5,7 +5,8 @@
 
 	"dependencies": {
 	    "twit": "2.1.0",
-	    "express": "1.4.21"
+	    "express": "4.13.1",
+	    "ejs": "2.3.3"
 	}
 }
   
