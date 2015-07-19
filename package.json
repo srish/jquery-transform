@@ -1,0 +1,11 @@
+{
+  "name": "twit",
+  "version": "0.0.1",
+  "description": "A jquery tranform app",
+
+	"dependencies": {
+	    "twit": "2.1.0",
+	    "express": "1.4.21"
+	}
+}
+  
