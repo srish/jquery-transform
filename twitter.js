@@ -5,6 +5,7 @@ var path = require('path');
 var Twit = require('twit');
 var async = require('async');
 var twitter = require('twitter');
+var bodyParser = require('body-parser');
 _ = require('underscore')._;
 
 var followers = [];
@@ -20,16 +21,22 @@ var T = new Twit({
 });
 
 app.engine('.ejs', require('ejs').__express);
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
+
 app.use(express.static(__dirname + '/public'));
 
 // routing for the homepage
-app.get("/", function(req, res) {
-
-    setTimeout(function() {
-
-    }, 1000); 
-
-    T.get('followers/ids', { screen_name: 'srish_aka_tux', count: 30},  function (err, data, response) {
+app.post("/twitter_followers", function(req, res) {
+ 
+    T.get('followers/ids', { screen_name: req.body.name, count: 30},  function (err, data, response) {
         followers = data.ids;
 
         async.each(followers, function(follower_id, callback) {
@@ -47,15 +54,19 @@ app.get("/", function(req, res) {
             } else {
                 console.log("Loop is done");
 
-                res.render('index.ejs', {
+                res.render('twitter_followers.ejs', {
                     follower_data: follower_data,
-                    follower_profile_url: follower_profile_url
+                    follower_profile_url: follower_profile_url,
+                    screen_name: req.body.name,
                 });
             }
         });
     
     });
+});
 
+app.get("/", function(req, res) {
+    res.render('index.ejs');
 });
 
 app.listen(8000);

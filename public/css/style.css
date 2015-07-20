@@ -13,3 +13,12 @@ body {
 	background-color: black;
 	color: white;
 }
+
+.form-title {
+	margin-top: 100px;
+}
+
+.form-horizontal {
+	margin-top: 20px;
+}
+
