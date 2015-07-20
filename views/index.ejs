@@ -10,17 +10,22 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+    <!-- Custom --> 
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+
   </head>
   <body>
 
-  <div class="container">
     <h1>Showcase!</h1>
 
     <% _.each(follower_data || {}, function(follower, index) { %>
-      <img src="<%= follower %>">
+      <a href="<%= follower_profile_url[index] %>" target="_blank">
+        <img src="<%= follower %>">
+      </a>
+      
     <% }) %>
 
-  </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
